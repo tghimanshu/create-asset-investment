@@ -1,5 +1,10 @@
 "use strict";
 
+/**
+ * Chart Colors.
+ * Defines a set of standard colors used in charts.
+ * @type {Object}
+ */
 window.chartColors = {
   red: "rgb(255, 99, 132)",
   orange: "rgb(255, 159, 64)",
@@ -10,6 +15,10 @@ window.chartColors = {
   grey: "rgb(201, 203, 207)",
 };
 
+/**
+ * Self-invoking function to initialize chart samples utilities.
+ * @param {Object} global The global object (window).
+ */
 (function (global) {
   var MONTHS = [
     "January",
@@ -43,10 +52,20 @@ window.chartColors = {
 
   Samples.utils = {
     // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+    /**
+     * Seeds the random number generator.
+     * @param {number} seed The seed value.
+     */
     srand: function (seed) {
       this._seed = seed;
     },
 
+    /**
+     * Generates a pseudo-random number between min and max.
+     * @param {number} min The minimum value (default 0).
+     * @param {number} max The maximum value (default 1).
+     * @return {number} A pseudo-random number.
+     */
     rand: function (min, max) {
       var seed = this._seed;
       min = min === undefined ? 0 : min;
@@ -55,6 +74,17 @@ window.chartColors = {
       return min + (this._seed / 233280) * (max - min);
     },
 
+    /**
+     * Generates an array of random numbers based on configuration.
+     * @param {Object} config Configuration object.
+     * @param {number} [config.min=0] Minimum value.
+     * @param {number} [config.max=1] Maximum value.
+     * @param {Array} [config.from=[]] Base array to start from.
+     * @param {number} [config.count=8] Number of values to generate.
+     * @param {number} [config.decimals=8] Number of decimal places.
+     * @param {number} [config.continuity=1] Probability of continuity.
+     * @return {Array<number|null>} Array of generated numbers.
+     */
     numbers: function (config) {
       var cfg = config || {};
       var min = cfg.min || 0;
@@ -79,6 +109,16 @@ window.chartColors = {
       return data;
     },
 
+    /**
+     * Generates an array of label strings.
+     * @param {Object} config Configuration object.
+     * @param {number} [config.min=0] Minimum value.
+     * @param {number} [config.max=100] Maximum value.
+     * @param {number} [config.count=8] Number of labels.
+     * @param {number} [config.decimals=8] Number of decimal places.
+     * @param {string} [config.prefix=""] Prefix for the labels.
+     * @return {Array<string>} Array of label strings.
+     */
     labels: function (config) {
       var cfg = config || {};
       var min = cfg.min || 0;
@@ -98,6 +138,13 @@ window.chartColors = {
       return values;
     },
 
+    /**
+     * Generates an array of month names.
+     * @param {Object} config Configuration object.
+     * @param {number} [config.count=12] Number of months.
+     * @param {number} [config.section] Length of substring for month name.
+     * @return {Array<string>} Array of month names.
+     */
     months: function (config) {
       var cfg = config || {};
       var count = cfg.count || 12;
@@ -113,10 +160,21 @@ window.chartColors = {
       return values;
     },
 
+    /**
+     * Returns a color from the COLORS array based on index.
+     * @param {number} index Index of the color.
+     * @return {string} Hex color string.
+     */
     color: function (index) {
       return COLORS[index % COLORS.length];
     },
 
+    /**
+     * Returns a transparent version of a color.
+     * @param {string} color The color to transparentize.
+     * @param {number} [opacity=0.5] Opacity value (0 to 1).
+     * @return {string} RGBA color string.
+     */
     transparentize: function (color, opacity) {
       var alpha = opacity === undefined ? 0.5 : 1 - opacity;
       return Color(color).alpha(alpha).rgbString();
@@ -124,6 +182,11 @@ window.chartColors = {
   };
 
   // DEPRECATED
+  /**
+   * Generates a random scaling factor.
+   * @deprecated
+   * @return {number} Random number between -100 and 100.
+   */
   window.randomScalingFactor = function () {
     return Math.round(Samples.utils.rand(-100, 100));
   };

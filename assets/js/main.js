@@ -29452,6 +29452,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
 ( function( $ ) {
     'use strict';
 
+    /**
+     * jQuery plugin to fix grid item alignment issues.
+     * @return {jQuery} The jQuery object for chaining.
+     */
     jQuery.fn.jsflexalig = function() {
         var core = function() {
             var parentEl      = $( this ),
@@ -29476,6 +29480,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     };
 
     // Used class: .flex-content-justify
+    /**
+     * Initializes jsflexalig plugin on window resize and load.
+     */
     $( window ).on( 'resize load', function() {
         $( '.flex-content-justify' ).jsflexalig();
     } );
@@ -29490,6 +29497,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
 
     // Hide menu
     if ( $( '.site-header .header-center' ).length ) {
+        /**
+         * Toggles the mobile menu visibility when a link is clicked.
+         */
         $( '.site-header .header-center .menu-primary li a[href*="#"]' ).on( 'click', function() {
             $( '.adv-hamburger' ).toggleClass( 'opened' );
             $( '.menu-toggle' ).toggleClass( 'show' );
@@ -29499,6 +29509,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
 
     // Menu-primary margin right counting
     if ( $( '.site-header .header-center' ).length ) {
+        /**
+         * Adjusts the right margin of the primary menu based on header width and window size.
+         */
         $( window ).on( 'resize load', function() {
             var header_width = $( '.site-header' ).width();
 
@@ -29511,6 +29524,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     }
 
     // Main spacing from header height
+    /**
+     * Adjusts the top margin of the main content area based on header height and window size.
+     */
     $( window ).on( 'resize load', function() {
         var window_height = window.innerHeight;
         var header_height = $( '.site-header' ).height();
@@ -29539,6 +29555,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
 ( function( $ ) {
     'use strict';
 
+    /**
+     * Adds an animation class to the loading element after a delay.
+     */
     setTimeout( function() {
         $( '.loading' ).addClass( 'animated slideOutRight' );
     }, 1000 );
@@ -29548,6 +29567,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     var isAndroid = ua.indexOf( "android" ) > -1;
 
     if ( isAndroid ) {
+        /**
+         * Hides the loading element after a delay on Android devices.
+         */
         setTimeout( function() {
             $( '.loading' ).css( 'display', 'none' );
         }, 1000 );
@@ -29581,6 +29603,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
             var limitBlock = $( '.site-footer' );
         }
 
+        /**
+         * Handles sticky element positioning on scroll, resize, and load.
+         */
         $( window ).on( 'scroll resize load', function() {
             var stickyWidth  = el.width();
             var stickyHeight = el.height();
@@ -29629,6 +29654,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     // Accessing a specific section of the page by clicking a link
     // Used class: .scroll-to-id
     if ( $( '.scroll-to-id' ).length ) {
+        /**
+         * Smoothly scrolls to the target section when a .scroll-to-id link is clicked.
+         * @param {Event} event The click event.
+         */
         $( '.scroll-to-id' ).click( function( event ) {
             if ( this.hash !== '' ) {
                 event.preventDefault();
@@ -29651,7 +29680,13 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
         } );
     }
 
-    // Debounce function used for button-clicked-true class removal after last scroll or resize event triggered
+    /**
+     * Debounce function used for button-clicked-true class removal after last scroll or resize event triggered.
+     * @param {Function} func The function to debounce.
+     * @param {number} wait The delay in milliseconds.
+     * @param {boolean} immediate Whether to trigger the function on the leading edge.
+     * @return {Function} The debounced function.
+     */
     function debounce( func, wait, immediate ) {
         var timeout;
 
@@ -29695,6 +29730,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
         } );
 
     // Bind click handler to menu items
+    /**
+     * Handles clicks on navigation menu items to smooth scroll and set active state.
+     * @param {Event} e The click event.
+     */
     menuItems.click( function( e ) {
         var href      = $( this ).attr( 'href' ),
             offsetTop = href === '#' ? 0 : $( href ).offset().top;
@@ -29715,6 +29754,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
         behavior: 'smooth'
     } );
 
+    /**
+     * Updates the active menu item and URL hash on scroll.
+     * @param {Event} e The scroll event.
+     */
     $( window ).scroll( function( e ) {
         viewportWidth = $( window ).width();
 
@@ -29755,6 +29798,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     $( window ).on( 'scroll resize', remove_header_button_class );
 
     // Function when link with # scroll to link
+    /**
+     * Handles initial scroll position if a hash is present in the URL on page load.
+     */
     $( document ).ready( function() {
         if ( typeof window.location.href.split( '#!' )[1] !== 'undefined' ) {
             var id = '#' + window.location.href.split( '#!' )[1];
@@ -29796,6 +29842,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     'use strict';
 
     // Open menu
+    /**
+     * Toggles the mobile menu when the hamburger icon is clicked.
+     */
     $( '.adv-hamburger' ).on( 'click', function() {
         $( this ).toggleClass( 'opened' );
         $( '.menu-toggle' ).toggleClass( 'show' );
@@ -29812,15 +29861,25 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
 
     // DROPDOWN CLICK EFFECT FUNCTIONS
     // Primary
+    /**
+     * Handles showing the dropdown menu with a slide animation.
+     */
     $( '.dropdown-click-effect' ).on( 'show.bs.dropdown', function() {
         $( this ).find( '.dropdown-menu' ).first().stop( true, true ).slideToggle( 300 );
     } );
 
+    /**
+     * Handles hiding the dropdown menu with a slide animation.
+     */
     $( '.dropdown-click-effect' ).on( 'hide.bs.dropdown', function() {
         $( this ).find( '.dropdown-menu' ).first().stop( true, true ).slideToggle( 300 );
     } );
 
     // Secondary
+    /**
+     * Handles toggling secondary dropdown menus.
+     * @param {Event} e The click event.
+     */
     $( '.dropdown-child-click-effect .dropdown-toggle' ).click( function( e ) {
         e.preventDefault();
 
@@ -29829,6 +29888,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     } );
 
     // DROPDOWN HOVER FUNCTIONS
+    /**
+     * Handles dropdown hover effects.
+     */
     $( '.dropdown-hover, .dropdown-hover .dropdown-submenu' ).on( 'mouseenter mouseleave', function() {
         $( this ).toggleClass( 'show' );
         $( this ).find( '> .dropdown-item' ).toggleClass( 'active' );
@@ -29836,6 +29898,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     } );
 
     // DROPDOWN SUBMENU FUNCTIONS
+    /**
+     * Handles submenu toggling on click.
+     * @param {Event} e The click event.
+     */
     $( ".dropdown-menu [data-toggle='dropdown']" ).on( 'click', function( e ) {
         e.preventDefault();
         e.stopPropagation();
@@ -29879,11 +29945,17 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     "use strict";
 
     // A little plugin which makes Bootstrap 4 custom file input dynamic with no dependencies.
+    /**
+     * Initializes custom file inputs.
+     */
     $( document ).ready( function() {
         bsCustomFileInput.init()
     } );
 
     // Input with Label Effects
+    /**
+     * Toggles 'has-content' class on inputs with label effects based on their value.
+     */
     $( '.form-label-effect [class*="form-label-effect"]' ).focusout( function() {
         if ( $( this ).val() != '' ) {
             $( this ).addClass( 'has-content' );
@@ -29933,6 +30005,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     'use strict';
 
     // Varying plans modal content
+    /**
+     * Updates modal content based on the button that triggered it.
+     * @param {Event} event The show.bs.modal event.
+     */
     $( '#plans-modal' ).on( 'show.bs.modal', function( event ) {
         var button    = $( event.relatedTarget );
         var recipient = button.data( 'whatever' );
@@ -29957,6 +30033,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
         warningMessage = "Fill up the form, please!", // Warning message
         errorMessage   = "Something go wrong. Try again later!";  // Error message
 
+    /**
+     * Handles form submission via AJAX.
+     * @param {Event} event The submit event.
+     */
     form.on( 'submit', function( event ) {
         event.preventDefault();
 
@@ -29992,6 +30072,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     var alertTimeout,
         delay = 5000;
 
+    /**
+     * Removes the alert after a delay.
+     */
     function removeAlert() {
         clearTimeout( alertTimeout );
 
@@ -30002,6 +30085,11 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
         }, delay );
     }
 
+    /**
+     * Displays an alert message.
+     * @param {string} message The message to display.
+     * @param {string} type The type of alert ('success', 'warning', 'error').
+     */
     function callAlert( message, type ) {
         $( '.alert' ).stop().remove();
 
@@ -30027,6 +30115,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     }
 
     $( function() {
+        /**
+         * Closes the alert when the close button is clicked.
+         * @param {Event} event The click event.
+         */
         $( 'body' ).on( 'click', '.alert__button', function( event ) {
             event.preventDefault();
 
@@ -30054,6 +30146,10 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
     var aside_sticky_class = $( '#aside-sticky' );
 
     // Cancel the default action
+    /**
+     * Prevents default action for example links.
+     * @param {Event} e The click event.
+     */
     $( '.bd-example a' ).click( function( e ) {
         e.preventDefault();
     } );
@@ -30069,6 +30165,9 @@ var is_safari   = /^((?!chrome|android).)*safari/i.test( navigator.userAgent );
 
     // Sticky
     if ( aside_sticky_class.length ) {
+        /**
+         * Toggles sticky class for aside element on scroll.
+         */
         $( window ).scroll( function() {
             if ( aside_sticky_class.length ) {
                 var position    = $( window ).scrollTop() - aside_sticky_class.offset().top;
