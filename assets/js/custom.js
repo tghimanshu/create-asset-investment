@@ -1,5 +1,12 @@
 (function ($) {
+  /**
+   * Initializes document ready event handlers.
+   */
   $(document).ready(() => {
+    /**
+     * Toggles the hamburger menu and navigation visibility.
+     * @param {Event} e The click event.
+     */
     function hamburger(e) {
       e.preventDefault();
       $(".hamburger i").toggleClass("fa-times", 1000);
@@ -12,6 +19,11 @@
     }
 
     $(".hamburger").click(hamburger);
+
+    /**
+     * Closes the menu when clicking on the menu container in mobile view.
+     * @param {Event} e The click event.
+     */
     $(".menu").click(function (e) {
       e.preventDefault();
       if ($(window).width() <= 678) {
@@ -20,6 +32,10 @@
       }
     });
 
+    /**
+     * Smooth scrolls to the target section when a menu link is clicked.
+     * @param {Event} e The click event.
+     */
     $(".menu ul li a").click(function (e) {
       window.scrollTo({
         top:
@@ -28,6 +44,9 @@
       });
     });
 
+    /**
+     * Highlights the active menu item based on scroll position.
+     */
     $(window).scroll(function () {
       var scrollLink = $(".scroll");
       var scrollbarLocation = $(this).scrollTop();
@@ -44,6 +63,9 @@
       });
     });
 
+    /**
+     * Adjusts navigation bar styling and "back to top" button visibility on scroll.
+     */
     document.addEventListener("scroll", () => {
       let x = window.scrollY;
       if (x >= 5) {
@@ -66,9 +88,19 @@
 
   /* Charts JS */
   let myCal = (12.6 - 5) / 5;
+
+  /**
+   * Calculates a value based on linear interpolation.
+   * @param {number} first The starting value.
+   * @param {number} last The ending value.
+   * @param {number} years The number of years (steps).
+   * @param {number} step The current step index.
+   * @return {number} The calculated value.
+   */
   function getCalData(first, last, years, step) {
     return first + ((last - first) / years) * step;
   }
+
   var leftlineChartData = {
     labels: ["2015", "2016", "2017", "2017", "2018", "2019", "2020"],
     datasets: [
@@ -136,6 +168,10 @@
     ],
   };
 
+  /**
+   * Window load event handler.
+   * Initializes the charts.
+   */
   window.onload = function () {
     var lctx = document.getElementById("leftCanvas").getContext("2d");
     var rctx = document.getElementById("rightCanvas").getContext("2d");
@@ -205,6 +241,9 @@
     });
   };
 
+  /**
+   * Randomizes the data for the chart when the randomize button is clicked.
+   */
   $("#randomizeData").click(function () {
     lineChartData.datasets.forEach(function (dataset) {
       dataset.data = dataset.data.map(function () {
